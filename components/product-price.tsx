@@ -20,7 +20,7 @@ export function ProductPrice({
   freeShipping,
 }: ProductPriceProps) {
   return (
-    <div className="px-4 pt-4">
+    <div className="px-4 pt-4 lg:px-0">
       {/* Deal badge */}
       <div className="mb-2 inline-flex items-center rounded bg-[#3483fa] px-1.5 py-0.5">
         <span className="text-xs font-semibold text-[#fff]">OFERTA DO DIA</span>

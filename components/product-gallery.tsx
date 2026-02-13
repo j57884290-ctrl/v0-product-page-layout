@@ -21,7 +21,47 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
 
   return (
     <>
-      <div className="relative">
+      {/* ===== DESKTOP: thumbnails on left + main image on right ===== */}
+      <div className="hidden lg:flex lg:gap-4 lg:py-4">
+        {/* Thumbnail column */}
+        <div className="flex w-[64px] shrink-0 flex-col gap-2 overflow-y-auto">
+          {images.map((img, i) => (
+            <button
+              key={i}
+              onMouseEnter={() => setCurrentIndex(i)}
+              onClick={() => setCurrentIndex(i)}
+              className={`h-[64px] w-[64px] shrink-0 overflow-hidden rounded border-2 transition-colors ${
+                currentIndex === i
+                  ? "border-[#3483fa]"
+                  : "border-[#e5e5e5] hover:border-[#3483fa]"
+              }`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={img}
+                alt={`Miniatura ${i + 1}`}
+                className="h-full w-full object-contain"
+              />
+            </button>
+          ))}
+        </div>
+
+        {/* Main image */}
+        <div
+          className="relative flex flex-1 cursor-zoom-in items-center justify-center"
+          onClick={() => setLightboxOpen(true)}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={images[currentIndex]}
+            alt={title}
+            className="max-h-[500px] max-w-full object-contain transition-opacity"
+          />
+        </div>
+      </div>
+
+      {/* ===== MOBILE: carousel with arrows + dots ===== */}
+      <div className="relative lg:hidden">
         {/* Counter */}
         <div className="absolute left-4 top-4 z-10 flex items-center rounded-full border border-[#eee] bg-[#fff] px-2 py-0.5 text-xs font-semibold text-[#333]">
           {currentIndex + 1} / {images.length}
@@ -79,7 +119,7 @@ export function ProductGallery({ images, title }: ProductGalleryProps) {
         </div>
       </div>
 
-      {/* Lightbox */}
+      {/* ===== LIGHTBOX ===== */}
       {lightboxOpen && (
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-[rgba(0,0,0,0.92)] p-5"

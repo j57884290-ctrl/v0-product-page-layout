@@ -24,7 +24,7 @@ export function ProductVariants({
   const [selectedSize, setSelectedSize] = useState(0)
 
   return (
-    <div className="flex flex-col gap-5 px-4 pt-4">
+    <div className="flex flex-col gap-5 px-4 pt-4 lg:px-0 lg:pt-0">
       {/* Color */}
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-1.5">
